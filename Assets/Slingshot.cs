@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Slingshot : MonoBehaviour {
 
+    public static Slingshot S;
+
     public GameObject prefabProjectile;
     public float velocityMult = 4f;
     public bool _________;
@@ -13,6 +15,8 @@ public class Slingshot : MonoBehaviour {
 
     void Awake()
     {
+        S = this;
+
         Transform launchPointTrans = transform.Find("LaunchPoint");
         launchPoint = launchPointTrans.gameObject;
         launchPoint.SetActive(false);
@@ -68,6 +72,7 @@ public class Slingshot : MonoBehaviour {
             projectile.GetComponent<Rigidbody>().velocity = -mouseDelta * velocityMult;
             FollowCam.S.poi = projectile;
             projectile = null;
+            MissionDemolition.ShotFired();
         }
     }
 
